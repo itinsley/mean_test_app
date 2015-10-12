@@ -1,6 +1,4 @@
 var express = require('express')
-  , router = express.Router()
-  , Nerd = require('./models/nerd')
 
 module.exports = function(app) {
 
@@ -8,9 +6,7 @@ module.exports = function(app) {
   // handle things like api calls
   // authentication routes
 
-  router.use('/nerds', require('./controllers/nerds'))
-
-
+  app.get('/api/restaurants', require('./controllers/restaurants'))
 
   // route to handle creating goes here (app.post)
   // route to handle delete goes here (app.delete)
