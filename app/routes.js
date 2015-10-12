@@ -1,4 +1,6 @@
-var Nerd = require('./models/nerd');
+var express = require('express')
+  , router = express.Router()
+  , Nerd = require('./models/nerd')
 
 module.exports = function(app) {
 
@@ -6,15 +8,9 @@ module.exports = function(app) {
   // handle things like api calls
   // authentication routes
 
-  // sample api route
-  app.get('/api/nerds', function(req, res) {
-    // use mongoose to get all nerds in the database
-    Nerd.find(function(err, nerds) {
-      if (err)
-        res.send(err);
-      res.json(nerds);
-    });
-  });
+  router.use('/nerds', require('./controllers/nerds'))
+
+
 
   // route to handle creating goes here (app.post)
   // route to handle delete goes here (app.delete)
