@@ -1,5 +1,12 @@
 <div class="jumbotron text-center">
-    <h1>Nerds and Proud</h1>
+    <h1>Restaurant Selector!</h1>
 
-    <p>{{ tagline }}</p>
+    <p>Choose from {{ restaurants.length }}</p>
+
+    <ul >
+      <li ng-repeat="restaurant in restaurants">
+        <span>{{restaurant.name}}</span>
+      </li>
+    </ul>
+
 </div>
