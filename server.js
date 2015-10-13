@@ -9,14 +9,15 @@ var methodOverride = require('method-override');
 // configuration ===========================================
 
 // config files
-var db = require('./config/db');
+var config = require('./config');
 
 // set our port
 var port = process.env.PORT || 8080;
 
 // connect to our mongoDB database
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/stencil-dev');
+console.log("connecting to mongodb: " + config.url)
+mongoose.connect(config.url);
 
 
 // get all data/stuff of the body (POST) parameters

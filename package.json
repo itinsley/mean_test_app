@@ -1,15 +1,19 @@
-    {
-      "name": "starter-node-angular",
-      "main": "server.js",
-      "dependencies": {
-        "express" : "~4.5.1",
-        "mongoose" : "~3.8.0",
-        "body-parser" : "~1.4.2",
-        "method-override" : "~2.0.2"
-      },
-      "devDependencies": {
-          "chai": "^3.0.0",
-          "chai-subset": "^1.0.0",
-          "supertest": "^1.0.1"
-        }
+{
+  "name": "starter-node-angular",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "NODE_ENV=test mocha $(find test)"
+  },
+  "dependencies": {
+    "express" : "~4.5.1",
+    "mongoose" : "~3.8.0",
+    "body-parser" : "~1.4.2",
+    "method-override" : "~2.0.2"
+  },
+  "devDependencies": {
+      "chai": "^3.0.0",
+      "chai-subset": "^1.0.0",
+      "supertest": "^1.0.1"
     }
+}
