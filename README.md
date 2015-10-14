@@ -1,3 +1,3 @@
 
 # Seed data
- mongoimport --db test --collection restaurants --drop --file seed-data.json
+mongoimport --db stencil-dev --collection restaurants --drop --file seed-data.json

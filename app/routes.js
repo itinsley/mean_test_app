@@ -7,6 +7,7 @@ module.exports = function(app) {
   // authentication routes
 
   app.get('/api/restaurants', require('./controllers/restaurants'))
+  app.get('/api/restaurant/:id', require('./controllers/restaurants'))
 
   // route to handle creating goes here (app.post)
   // route to handle delete goes here (app.delete)
