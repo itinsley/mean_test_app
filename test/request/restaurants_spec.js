@@ -19,7 +19,7 @@ describe('API', function () {
     done();
   });
   describe('Restaurants', function () {
-    describe('GET', function () {
+    describe('GET Index', function () {
       it('returns all records', function (done) {
         request(app).get('/api/restaurants').expect(200).end(function (err, res) {
           if (err) { return done(err) }
@@ -31,15 +31,14 @@ describe('API', function () {
         })
       })
     })
-  })
-  describe('Restaurant/:id', function () {
-    describe('GET', function () {
+
+    describe('GET Show', function () {
       it('returns a single record', function (done) {
         //Lookup ID
         Restaurant.find({name: 'Chinese Restaurant'}, function(err, restaurants) {
           //Retrieve using ID
           restaurant=restaurants[0];
-          request(app).get('/api/restaurant/'+restaurant.id).expect(200).end(function (err, res) {
+          request(app).get('/api/restaurants/'+restaurant.id).expect(200).end(function (err, res) {
             if (err) { throw err }
             expect(res.body.name).to.eql("Chinese Restaurant")
           })
@@ -48,5 +47,6 @@ describe('API', function () {
       })
     })
   })
+
 })
 

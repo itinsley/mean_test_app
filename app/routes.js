@@ -1,4 +1,5 @@
 var express = require('express')
+  , router = express.Router()
 
 module.exports = function(app) {
 
@@ -6,11 +7,10 @@ module.exports = function(app) {
   // handle things like api calls
   // authentication routes
 
-  app.get('/api/restaurants', require('./controllers/restaurants'))
-  app.get('/api/restaurant/:id', require('./controllers/restaurants'))
-
-  // route to handle creating goes here (app.post)
-  // route to handle delete goes here (app.delete)
+  //Restaurants
+  var restaurants = require('./controllers/restaurants')
+  app.get('/api/restaurants', restaurants.index)
+  app.get('/api/restaurants/:id', restaurants.show)
 
   // frontend routes =========================================================
   // route to handle all angular requests
