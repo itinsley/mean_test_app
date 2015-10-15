@@ -1,3 +1,4 @@
+async = require('async')
 Restaurant = require('./app/models/restaurant')
 
 var config = require('./config');
@@ -6,31 +7,35 @@ var mongoose = require('mongoose');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
-//Nested callback mess - put this into async or equivalent
+
+//ASYNC TASKS
+tasks = []
+tasks.push(function(callback){
+  var restaurant = new Restaurant({"name": "ian best", "description": "the best"});
+  restaurant.save(function (err, result) {
+    handleError(err);
+    console.log("saved" + result);
+    callback();
+  });
+});
+
+//Open db, then clear the data synchronously before running async tasks and closing db.
 db.once('open', function (callback) {
-
   mongoose.connection.db.dropDatabase(function(err, result) {
-    console.log("Clearing database");
-    if (err) handleError(err);
-
-    var restaurant = new Restaurant({
-      "name": "ian8a", "description": "the best"
-    });
-    restaurant.save(function (err, result) {
-      if (err) handleError(err)
-      console.log('saved...'+ result)
-      db.close();
-    });
+    handleError(err);
   });
 
+  async.parallel(tasks, function(){
+    db.close()
+  });
 });
 
 mongoose.connect(config.url);
 
-
 function handleError(err){
-  console.log("EXCEPTION");
-  console.log(err);
-  process.exit();
+  if (err)
+    console.log("EXCEPTION");
+    console.log(err);
+    process.exit();
 }
 
