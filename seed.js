@@ -8,23 +8,14 @@ var mongoose = require('mongoose');
 var cn = mongoose.connection;
 cn.on('error', console.error.bind(console, 'connection error:'));
 
-function createRestaurants(crCallback){
-  var userIds
-  async.series([
-    function(callback){
-      User.find({},function(err, us){
-        userIds = us.map(function(u){return u.id})
-        callback()
-      })
-    },
-    function(callback){
-      var restaurant = new Restaurant({"name": "ian best", "description": "the best", "userVotes": userIds});
-      restaurant.save(function (err, result) {
-        return crCallback();
-      });
-    }
-  ])
-
+function createRestaurants(callback){
+  User.find({},function(err, users){
+    var userIds = users.map(function(u){return u.id})
+    var restaurant = new Restaurant({"name": "ian best", "description": "the best", "userVotes": userIds});
+    restaurant.save(function (err, result) {
+      callback();
+    });
+  })
 }
 
 function createUser(userName, callback){
