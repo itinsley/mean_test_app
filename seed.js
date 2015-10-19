@@ -39,17 +39,17 @@ function createUsers(callback){
   });
 }
 
-
-async.series([
-  function(callback){ cn.once('open', callback) },
-  function(callback){ cn.db.dropDatabase(callback) },
-  createUsers,
-  createRestaurants,
-  function(callback){
-    cn.close()
-    callback();
-    console.log("Finished. Database closed")
-  }
-]);
+cn.once('open', function(){
+  async.series([
+    function(callback){ cn.db.dropDatabase(callback) },
+    createUsers,
+    createRestaurants,
+    function(callback){
+      cn.close()
+      callback();
+      console.log("Finished. Database closed")
+    }
+  ])
+});
 
 mongoose.connect(config.url);
